@@ -1,0 +1,25 @@
+name: Docker Build Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-docker-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show files
+        run: ls -R
+
+      - name: Build Docker image
+        run: |
+          echo "Building Docker image..."
+          docker build -t my-nginx:ci .
+          echo "Docker image built successfully ✅"
+
+      - name: List Docker images
+        run: docker images
